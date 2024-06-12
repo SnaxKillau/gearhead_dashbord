@@ -72,12 +72,12 @@
 </template>
 
 <script setup>
-import { computed, ref, reactive, onMounted, watch } from "vue";
+import { computed, ref, reactive, onMounted } from "vue";
 import { createNamespacedHelpers } from "vuex-composition-helpers";
 
 const { useState, useActions } = createNamespacedHelpers("color");
 
-const { colorData, deleteState } = useState(["colorData", "deleteState"]);
+const { colorData } = useState(["colorData"]);
 const { getColor, deleteColor, editColor } = useActions([
   "getColor",
   "deleteColor",
@@ -85,9 +85,6 @@ const { getColor, deleteColor, editColor } = useActions([
 ]);
 
 onMounted(() => {
-  getColor();
-});
-watch(deleteState, () => {
   getColor();
 });
 const index = ref(0);

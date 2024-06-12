@@ -18,7 +18,7 @@
       </el-carousel-item>
     </el-carousel>
   </div>
-  <el-table :data="transformationState" style="width: 100%" max-height="500">
+  <el-table :data="transformationState" style="width: 100%" max-height="750">
     <el-table-column fixed prop="id" label="ID" width="150" />
     <el-table-column prop="model" label="Model" width="120" />
     <el-table-column prop="year" label="Year" width="120" />
@@ -50,14 +50,6 @@
         >
           View Image
         </el-button>
-        <el-button
-          link
-          type="primary"
-          size="small"
-          @click.prevent="deleteRow(scope.$index)"
-        >
-          Edit
-        </el-button>
         <el-popconfirm
           width="220"
           confirm-button-text="OK"
@@ -79,17 +71,13 @@
 </template>
 
 <script setup>
-import { ref, defineModel, onMounted, watch } from "vue";
+import { ref, defineModel, onMounted } from "vue";
 import { Close } from "@element-plus/icons-vue";
 import { createNamespacedHelpers } from "vuex-composition-helpers";
 import { imageApi } from "@/api/ImageApi";
 
 const { useState, useActions } = createNamespacedHelpers("transformation");
-const { transformationState, deleteState, postingSuccessfully } = useState([
-  "transformationState",
-  "deleteState",
-  "postingSuccessfully",
-]);
+const { transformationState } = useState(["transformationState"]);
 const { getTransformation, deleteTransformation } = useActions([
   "getTransformation",
   "deleteTransformation",
@@ -100,12 +88,6 @@ const index = ref(0);
 const getImage = (img) => {
   return `${imageApi}${img}`;
 };
-watch(deleteState, () => {
-  getTransformation();
-});
-watch(postingSuccessfully, () => {
-  getTransformation();
-});
 onMounted(() => {
   getTransformation();
 });

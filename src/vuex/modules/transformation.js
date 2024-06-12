@@ -49,17 +49,21 @@ const actions = {
         })
         .catch((err) => {console.log(err)})
     },
-    posting({commit} , data){
+    posting({commit, dispatch} , data){
         commit("LOADING")
         Transformation.post(data)
-        .then(() => commit("POSTING"))
+        .then(() => {
+            commit("POSTING")
+            dispatch('getTransformation')
+        })
         .catch((err) => {console.log(err)})
     },
-    deleteTransformation({commit} , data){
+    deleteTransformation({commit, dispatch} , data){
         commit("LOADING")
         Transformation.delete(data)
         .then(() => {
             commit("DELETESUCCESSFULLY")
+            dispatch("getTransformation")
         })
         .catch()
     }

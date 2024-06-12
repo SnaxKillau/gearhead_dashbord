@@ -59,7 +59,7 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref } from "vue";
 import TableColor from "@/components/TableColor.vue";
 import NavBar from "@/components/NavBar.vue";
 import LoadingView from "@/components/LoadingView.vue";
@@ -67,19 +67,12 @@ import { createNamespacedHelpers } from "vuex-composition-helpers";
 
 const { useActions, useState } = createNamespacedHelpers("color");
 
-const { postColor, cancleError } = useActions(["postColor", "cancleError"]);
+const { postColor } = useActions(["postColor"]);
 const { error, loading } = useState(["error", "loading"]);
 const ruleFormRef = ref();
 const dialogTableVisible = ref(false);
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
-watch(error, () => {
-  if (error.value) {
-    setTimeout(() => {
-      cancleError();
-    }, 5000);
-  }
-});
 const convertDate = (inputDate) => {
   const date = new Date(inputDate);
   const year = date.getFullYear();

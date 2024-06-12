@@ -63,7 +63,7 @@
   </div>
 </template>
 <script setup>
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import LoadingView from "@/components/LoadingView.vue";
 import { Plus } from "@element-plus/icons-vue";
 import TableBrand from "@/components/TableBrand.vue";
@@ -81,22 +81,14 @@ const rules = ref({
   message: "Name can not be null",
   trigger: "blur",
 });
-const { getBrand, posting, cancle_error } = useActions([
+const { getBrand, posting } = useActions([
   "getBrand",
   "posting",
-  "cancle_error",
 ]);
 onMounted(() => {
   getBrand();
 });
 const { brand, Loading, error } = useState(["brand", "Loading", "error"]);
-watch(error, () => {
-  if (error.value) {
-    setTimeout(() => {
-      cancle_error();
-    }, 5000);
-  }
-});
 console.log(brand.value);
 const handleRemove = (uploadFile, uploadFiles) => {
   console.log(uploadFile, uploadFiles);

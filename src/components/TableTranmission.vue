@@ -41,21 +41,17 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from "vue";
+import { onMounted } from "vue";
 import { Timer } from "@element-plus/icons-vue";
 import { createNamespacedHelpers } from "vuex-composition-helpers";
 
 const { useState, useActions } = createNamespacedHelpers("tranmission");
 
 const { getTranmission, deleteTranmission } = useActions(["getTranmission" , "deleteTranmission"]);
-const { tranmission, deleteState } = useState(["tranmission" , "deleteState"]);
+const { tranmission } = useState(["tranmission"]);
 onMounted(() => {
   getTranmission()
 });
-watch(deleteState , () => {
-  getTranmission()
-})
-
 const confirmEvent = (index) => {
   deleteTranmission(index.id);
 };

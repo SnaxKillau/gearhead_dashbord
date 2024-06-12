@@ -6,6 +6,8 @@ import Order from "../page/OrderPage.vue"
 import Transformation from "@/page/TransformationPage.vue"
 import CaditionAndTransmission from "@/page/CaditionAndTransmissionPage.vue"
 import LoginPage from "@/page/LoginPage.vue"
+import InvoicePage from "@/page/InvoicePage.vue"
+import Notification from "@/page/NotificationPage.vue"
 import axios from "axios"
 const routes = [
     {
@@ -43,6 +45,16 @@ const routes = [
         path : "/login",
         name : "LoginPage",
         component : LoginPage
+    },
+    {
+        path : "/invoice",
+        name : "InvoicePage",
+        component  : InvoicePage
+    },
+    {
+        path : "/notification",
+        name : "NotificationPage",
+        component : Notification
     }
 ]
 const router = createRouter({
@@ -62,7 +74,6 @@ router.beforeEach((to, from, next) => {
         // If there's a token and the user is not on the login page, validate it
         axios.get("http://127.0.0.1:8072/auth/validate?token=" + token)
             .then(() => {
-                console.log("Token found and valid, allowing navigation.");
                 next();
             })
             .catch(() => {

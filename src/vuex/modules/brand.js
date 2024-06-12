@@ -66,15 +66,19 @@ const actions = {
         })
         .catch((err) => console.log(err))
     },
-    deleteBrand({commit}, id){
+    deleteBrand({commit, dispatch}, id){
         commit("LOADING")
         Brand.delete(id)
         .then(() => {
            commit("DELETE_SUCCESS")
            commit("MESSSAGE")
+           dispatch('getBrand')
         })
         .catch(() => {
             commit("ERROR")
+                setTimeout(() => {
+                commit("CANCLE_ERROR")
+            }, 5000);
         })
     },
     editBrand({commit} ,payload){
@@ -87,9 +91,6 @@ const actions = {
             commit("DELETE_SUCCESS")
         })
         .catch((err) => console.log(err))
-    },
-    cancle_error({commit}){
-        commit("CANCLE_ERROR")
     },
     search({commit} , data){
         console.log(data)

@@ -1,15 +1,18 @@
 <template lang="">
   <div class="container">
-    <NavBar />
+    <NavBar class="w-[215px]" />
     <h1 style="margin: 10px" class="text-2xl font-bold">Order</h1>
-    <div class="relative top-14 right-16 w-full">
-      <Order />
+    <div class="w-9/12 left-[250px] absolute top-20">
+      <Order/>
     </div>
   </div>
 </template>
 <script setup>
 import NavBar from "@/components/NavBar.vue";
 import Order from "@/components/TableOrder.vue";
+
+
+
 </script>
 <style lang="css">
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");

@@ -95,7 +95,7 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref } from "vue";
 import TableCondition from "@/components/TableCondition.vue"
 import TableTranmission from "@/components/TableTranmission.vue"
 import NavBar from "@/components/NavBar.vue";
@@ -107,10 +107,10 @@ const conditionHelpers = createNamespacedHelpers("condition");
 const { useActions : useConditionActions, useState : useConditionState } = conditionHelpers;
 const { useActions : useTranmssionActions, useState: useTranmssionState } = tranmissionHelpers;
 
-const { postTranmission, cancleError } = useTranmssionActions(["postTranmission" , "cancleError"])
+const { postTranmission } = useTranmssionActions(["postTranmission"])
 const { tranmissionError } = useTranmssionState(["tranmissionError"])
 
-const { postCondition, cancleConditionError } = useConditionActions(["postCondition", "cancleConditionError"])
+const { postCondition } = useConditionActions(["postCondition"])
 const { conditonError } = useConditionState(["conditonError"])
 
 const ruleFormRef = ref();
@@ -118,20 +118,7 @@ const dialogTableVisible = ref(false);
 const transitionVisible = ref(false);
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
-watch(tranmissionError, () => {
-  if (tranmissionError.value) {
-    setTimeout(() => {
-      cancleError()
-    }, 5000);
-  }
-});
-watch(conditonError, () => {
-  if (conditonError.value) {
-    setTimeout(() => {
-      cancleConditionError()
-    }, 5000);
-  }
-});
+
 
 const convertDate = (inputDate) => {
   const date = new Date(inputDate);

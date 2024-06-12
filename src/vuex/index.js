@@ -5,6 +5,9 @@ import transformationModule from "./modules/transformation";
 import colorModule from "./modules/color"
 import conditionModule from "./modules/condition"
 import tranmissionModule from "./modules/tranmission";
+import orderModule from "./modules/order";
+import invoiceModule from "./modules/invoice";
+import notificationModule from "./modules/notification";
 
 const store = createStore({
  modules: {
@@ -13,7 +16,10 @@ const store = createStore({
   transformation : transformationModule,
   color : colorModule,
   condition : conditionModule,
-  tranmission : tranmissionModule
+  tranmission : tranmissionModule,
+  order : orderModule,
+  invoice : invoiceModule,
+  notification : notificationModule
  }
 });
 

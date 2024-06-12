@@ -86,7 +86,10 @@ const login = () => {
     "password" : password.value
   }).then((res) => {
     localStorage.setItem("token" , res.data)
-    nav.push('/')
+    axios.get(`http://127.0.0.1:8072/auth/currentUser?token=${res.data}`).then((res) => {
+            localStorage.setItem("currentUser", res.data);
+            nav.push('/');
+    });
   })
   .catch(() => {incorrect.value = true})
 }

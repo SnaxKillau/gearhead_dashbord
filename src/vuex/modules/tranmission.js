@@ -43,11 +43,19 @@ const actions = {
         })
         .catch((err) => console.log(err))
     },
-    deleteTranmission({commit} , id){
+    deleteTranmission({commit, dispatch} , id){
         commit("LOADING")
         Tranmission.delete(id)
-        .then(() => {commit("DELETETRANMISSION")})
-        .catch(() => {commit("ERROR")})
+        .then(() => {
+            commit("DELETETRANMISSION")
+            dispatch("getTranmission")
+        })
+        .catch(() => {
+            commit("ERROR")
+            setTimeout(() => {
+            commit("CANCLE_ERROR")
+        }, 5000);    
+        })
     },
     postTranmission({commit} , data){
         commit("LOADING")

@@ -189,7 +189,7 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref, onMounted, watch } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import TableTransformation from "@/components/TableTransformation.vue";
 import NavBar from "@/components/NavBar.vue";
 import { createNamespacedHelpers } from "vuex-composition-helpers";
@@ -251,10 +251,8 @@ const uploadFile = (file) => {
   }
   uploadImg.value = true;
 };
-const value = ref([]);
-watch(value, () => {
-  console.log(value.value);
-});
+
+
 
 const ruleForm = reactive({
   model: "",

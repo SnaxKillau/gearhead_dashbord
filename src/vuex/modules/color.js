@@ -44,12 +44,18 @@ const actions = {
         })
         .catch((err) => console.log(err))
     },
-    deleteColor({commit} , id){
+    deleteColor({commit, dispatch} , id){
         commit("LOADING")
         Color.delete(id)
-        .then(() => {commit("DELETECOLOR")})
+        .then(() => {
+            commit("DELETECOLOR")
+            dispatch('getColor')
+         })
         .catch(() => {
             commit("ERROR")
+            setTimeout(() => {
+            commit("CANCLE_ERROR")
+        }, 5000);
         })
     },
     postColor({commit} , data){

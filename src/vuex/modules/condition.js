@@ -42,11 +42,19 @@ const actions = {
         })
         .catch((err) => console.log(err))
     },
-    deleteCondition({commit} , id){
+    deleteCondition({commit , dispatch} , id){
         commit("LOADING")
         Condition.delete(id)
-        .then(() => {commit("DELETECONDITION")})
-        .catch(() => {commit("ERROR")})
+        .then(() => {
+            commit("DELETECONDITION")
+            dispatch('getCondition')
+        })
+        .catch(() => {
+            commit("ERROR")
+            setTimeout(() => {
+                commit("CANCLE_ERROR")
+            }, 5000);
+    })
     },
     postCondition({commit} , data){
         commit("LOADING")

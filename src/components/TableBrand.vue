@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-import { computed, ref, reactive, onMounted, watch } from "vue";
+import { computed, ref, reactive, onMounted } from "vue";
 import { createNamespacedHelpers } from "vuex-composition-helpers";
 import { imageApi } from "@/api/ImageApi";
 
@@ -95,7 +95,7 @@ const getImage = (row) => {
 onMounted(() => {
   getBrand();
 });
-const { brandData, deleteState } = useState(["brandData", "deleteState"]);
+const { brandData } = useState(["brandData"]);
 const dialogVisible = ref(false);
 const search = ref("");
 const dialogTableVisible = ref(false);
@@ -107,9 +107,6 @@ const filterTableData = computed(() =>
       data.description.toLowerCase().includes(search.value.toLowerCase())
   )
 );
-watch(deleteState, () => {
-  getBrand();
-});
 const handleEdit = (index, row) => {
   ruleForm.name = row.description;
   editIndex.value = row.id

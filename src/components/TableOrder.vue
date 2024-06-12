@@ -1,273 +1,141 @@
 <template>
-    switch parent border: <el-switch v-model="parentBorder" /> switch child
-    border: <el-switch v-model="childBorder"/>
-    <el-table :data="tableData" :border="parentBorder" style="width: 100%" class=" mt-3">
-      <el-table-column type="expand">
-        <template #default="props">
-          <div m="4" class=" pl-4">
-            <p m="t-0 b-2">State: {{ props.row.state }}</p>
-            <p m="t-0 b-2">City: {{ props.row.city }}</p>
-            <p m="t-0 b-2">Address: {{ props.row.address }}</p>
-            <p m="t-0 b-2">Zip: {{ props.row.zip }}</p>
-            <h3>Family</h3>
-            <el-table :data="props.row.family" :border="childBorder" >
-              <el-table-column label="Name" prop="name" />
-              <el-table-column label="State" prop="state" />
-              <el-table-column label="City" prop="city" />
-              <el-table-column label="Address" prop="address" />
-              <el-table-column label="Zip" prop="zip" />
-            </el-table>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="Date" prop="date"/>
-      <el-table-column label="Name" prop="name" />
-      <el-table-column label="Options" >
-        <template #default="scope">
-          <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
-            >Accept</el-button
-          >
-          <el-popconfirm
-            confirm-button-text="Yes"
-            cancel-button-text="No"
-            icon-color="#FF0000"
-            title="Are you sure to denying this order?"
-            @confirm="confirmEvent"
-            @cancel="cancelEvent"
-          >
-            <template #reference>
-              <el-button class="delete-button" size="small">Deny</el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
- 
-    </el-table>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  
-  const parentBorder = ref(false)
-  const childBorder = ref(false)
-  const tableData = [
-    {
-      date: '2016-05-03',
-      name: 'Tom',
-      state: 'California',
-      city: 'San Francisco',
-      address: '3650 21st St, San Francisco',
-      zip: 'CA 94114',
-      family: [
-        {
-          name: 'Jerry',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Spike',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Tyke',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-      ],
-    },
-    {
-      date: '2016-05-02',
-      name: 'Tom',
-      state: 'California',
-      city: 'San Francisco',
-      address: '3650 21st St, San Francisco',
-      zip: 'CA ',
-      family: [
-        {
-          name: 'Jerry',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Spike',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Tyke',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-      ],
-    },
-    {
-      date: '2016-05-04',
-      name: 'Tom',
-      state: 'California',
-      city: 'San Francisco',
-      address: '3650 21st St, San Francisco',
-      zip: 'CA 94114',
-      family: [
-        {
-          name: 'Jerry',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Spike',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Tyke',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-      ],
-    },
-    {
-      date: '2016-05-01',
-      name: 'Tom',
-      state: 'California',
-      city: 'San Francisco',
-      address: '3650 21st St, San Francisco',
-      zip: 'CA 94114',
-      family: [
-        {
-          name: 'Jerry',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Spike',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Tyke',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-      ],
-    },
-    {
-      date: '2016-05-08',
-      name: 'Tom',
-      state: 'California',
-      city: 'San Francisco',
-      address: '3650 21st St, San Francisco',
-      zip: 'CA 94114',
-      family: [
-        {
-          name: 'Jerry',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Spike',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Tyke',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-      ],
-    },
-    {
-      date: '2016-05-06',
-      name: 'Tom',
-      state: 'California',
-      city: 'San Francisco',
-      address: '3650 21st St, San Francisco',
-      zip: 'CA 94114',
-      family: [
-        {
-          name: 'Jerry',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Spike',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Tyke',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-      ],
-    },
-    {
-      date: '2016-05-07',
-      name: 'Tom',
-      state: 'California',
-      city: 'San Francisco',
-      address: '3650 21st St, San Francisco',
-      zip: 'CA 94114',
-      family: [
-        {
-          name: 'Jerry',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Spike',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-        {
-          name: 'Tyke',
-          state: 'California',
-          city: 'San Francisco',
-          address: '3650 21st St, San Francisco',
-          zip: 'CA 94114',
-        },
-      ],
-    },
-  ]
-  </script>
-  
+  <div
+    v-if="imgHandle"
+    class="fixed z-30 top-0 left-0 w-screen h-screen flex justify-center items-center bg-gray-800 bg-opacity-50"
+  >
+    <el-carousel :interval="5000" arrow="always" class="w-2/4 h-3/4">
+      <el-carousel-item class="h-[30rem]">
+        <img
+          :src="imageApi.concat(path)"
+          alt=""
+          class="w-full h-full object-fill"
+        />
+        <el-icon
+          class="absolute top-5 right-5 bg-white w-7 h-7 shadow-md shadow-red-200 rounded-md"
+          @click="imgHandle = false"
+          ><Close
+        /></el-icon>
+      </el-carousel-item>
+    </el-carousel>
+  </div>
+  <LoadingView v-if = "Loading"/>
+  <el-table :data="order" style="width: 100%" max-height="750">
+    <el-table-column fixed prop="created" label="Date" width="150" />
+    <el-table-column prop="name" label="Name" width="120" />
+    <el-table-column prop="userEmail" label="User_Email" width="200" />
+    <el-table-column prop="source" label="Product Source" width="200" />
+    <el-table-column prop="address" label="Address" width="200" />
+    <el-table-column  label="Image" width="120">
+      <template #default="scope">
+        <el-button
+          link
+          type="primary"
+          size="small"
+          @click.prevent="imageView(scope.$index)"
+        >
+          View Image
+        </el-button>
+      </template>
+    </el-table-column>
+    <el-table-column fixed="right" label="Operations" width="200">
+      <template #default="scope">
+        <el-button link type="primary" size="small" @click.prevent = "accetHandle(scope.$index)" v-if=  "!scope.row.accept"> Accept </el-button>
+        <el-popconfirm
+          width="220"
+          confirm-button-text="OK"
+          cancel-button-text="No, Thanks"
+          icon-color="#626AEF"
+          title="Are you sure to deny this?"
+          @confirm="confirmEvent(scope.row)"
+        >
+          <template #reference>
+            <el-button link type="primary" size="small" v-if=  "!scope.row.accept">Deny</el-button>
+          </template>
+        </el-popconfirm>
+      </template>
+    </el-table-column>
+  </el-table>
+
+  <el-dialog v-model="dialogTableVisible" title="Set the Price" width="800">
+    <el-form
+      ref="ruleFormRef"
+      style="max-width: 600px"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="auto"
+      :size="formSize"
+      status-icon
+    >
+      <el-form-item label="Price" prop="price">
+        <el-input v-model="price" type="number" />
+      </el-form-item>
+      <el-form-item>
+        <el-button
+          type="primary"
+          class="bg-green-500 text-white"
+          style="margin-top: 10px"
+          @click.prevent = "accetBtn"
+        >
+          Accept
+        </el-button>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
+</template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+import { createNamespacedHelpers } from "vuex-composition-helpers";
+import { imageApi } from "@/api/ImageApi";
+import { Close } from "@element-plus/icons-vue";
+import LoadingView from "@/components/LoadingView.vue";
+
+const { useState, useActions } = createNamespacedHelpers("order");
+const { getOrder, accept, deny} = useActions(["getOrder", "accept", "deny"]);
+const { order, Loading } = useState(["order", "Loading"]);
+
+const dialogTableVisible = ref(false);
+const price = ref(0)
+const imgHandle = ref(false);
+const convertDate = (inputDate) => {
+  const date = new Date(inputDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed
+  const day = String(date.getDate()).padStart(2, "0");
+
+  const formatedDate = `${year}-${month}-${day}`;
+  return formatedDate;
+};
+
+const path  = ref("")
+const index = ref()
+onMounted(() => {
+  getOrder();
+});
+const imageView = (number) => {
+  path.value = order.value[number].imagePath;
+  console.log(path.value)
+  imgHandle.value = true;
+};
+const accetHandle = (num) => {
+  index.value = num
+  dialogTableVisible.value = true
+}
+const confirmEvent = (row) => {
+  deny({
+    id: row.id,
+    senderId : row.user_id,
+    created : convertDate(Date.now())
+  })
+}
+const accetBtn = () => {
+  const select = order.value[index.value]
+  accept({
+    id : select.id,
+    price : price.value,
+    senderId : localStorage.getItem("currentUser"),
+    created : convertDate(Date.now())
+  })
+  dialogTableVisible.value = false;
+}
+</script>

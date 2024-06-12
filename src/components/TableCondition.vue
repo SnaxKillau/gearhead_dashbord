@@ -41,21 +41,19 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from "vue";
+import { onMounted } from "vue";
 import { Timer } from "@element-plus/icons-vue";
 import { createNamespacedHelpers } from "vuex-composition-helpers";
 
 const { useState, useActions } = createNamespacedHelpers("condition");
 
 const { getCondition, deleteCondition } = useActions(["getCondition", "deleteCondition"])
-const { condition, deleteState } = useState(["condition", "deleteState"])
+const { condition } = useState(["condition"])
 
 onMounted(() => {
     getCondition()
 });
-watch(deleteState , () => {
-  getCondition()
-})
+
 const confirmEvent = (index) => {
   deleteCondition(index.id)
 };
